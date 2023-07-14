@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebGL Example</title>
+    <style>
+      canvas {
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="640" height="480"></canvas>
+
+    <script>
+      window.onload = function () {
+        var canvas = document.getElementById("myCanvas");
+        var gl = canvas.getContext("webgl");
+
+        if (!gl) {
+          alert("WebGL을 지원하지 않는 브라우저입니다.");
+          return;
+        }
+
+        // WebGL 초기화
+        // ...
+
+        // 3D 구 그리기
+        drawSphere(gl, 0, 0, 0, 50); // (0, 0, 0) 위치에 반지름 50의 3D 구 그리기
+
+      };
+
+      function drawSphere(gl, x, y, z, radius) {
+        var latitudeBands = 30;
+        var longitudeBands = 30;
+
+        var vertexPositionData = [];
+        var normalData = [];
+        var indexData = [];
+
+        // 3D 구 생성
+        // ...
+
+        // WebGL 관련 코드 작성
+        // ...
+
+      }
+    </script>
+  </body>
+</html>

@@ -1,46 +1,40 @@
-//입자 클래스 선언
-class Molecule {
-    //생성 함수
-    constructor (mass, charge, position, velocity, acceleration) {
-        //mass(질량): float
-        //charge(전하량): float
-        //position(위치): {x: float, y:float, z:float}
-        //velocity(속도): {x: float, y:float, z:float}
-        //acceleration(가속도): {x: float, y:float, z:float}
-
-        this.mass = mass;
-        this.charge = charge;
-
-        //벡터 자료형이 아닐 때 오류를 반환
-        if(typeof(position.x) != Number && typeof(position.y) != Number  && typeof(position.z) != Number ){
-            throw new Error('position shoud be Vector');
-        }
-        //벡터 자료형이 아닐 때 오류를 반환
-        if(typeof(velocity.x) != Number && typeof(velocity.y) != Number  && typeof(velocityn.z) != Number ){
-            throw new Error('velocity shoud be Vector');
-        }
-
-        //벡터 자료형이 아닐 때 오류를 반환
-        if(typeof(acceleration.x) != Number && typeof(acceleration.y) != Number  && typeof(acceleration.z) != Number ){
-            throw new Error('acceleration shoud be Vector');
-        }
-
-
-        this.position = position;
-        this.velocity = velocity;
-        this.acceleration = acceleration;
-
-    }
-    
-}
-
 //전역변수(입자 정보)
-molecules = []
 
+
+var angleCount = 0
+var angleAv = 0
+
+function refreshMolecules(arr, canvas){
+    for(var i = 0; i < arr.length; i++){
+        arr[i].acceleration = Vector3.scalarmul(arr[i].electricforceSum(arr), 1/arr[i].mass)
+        if(i != 0){
+            arr[i].refreshPositionInSphere(5)
+        }
+        else{
+            arr[i].refreshPosition()
+            //결합각의 평균을 구해보자.
+            angle = Math.acos(Vector3.dotproduct(arr[2].position, arr[1].position)/(arr[1].position.norm()*arr[2].position.norm()))*180/Math.PI
+            angleCount += 1
+            angleAv = (angleAv + angle) / angleCount
+            console.log(angleAV)
+        }
+        dpMolecule(arr[i], canvas)
+    }
+}
 
 //메인 코드 동작부
 $(document).ready(function () {
     var canvas = $("#myCanvas")[0];
-    drawCircle(canvas);
+    var ctx = canvas.getContext('2d');
+    molecules = []
+    molecules[0] = new Molecule(137000, 2, new Vector3(0,0, 0), new Vector3(0,0,0), new Vector3(0,0,0))
+    molecules[1] = new Molecule(1, -1, new Vector3(1, 5, 0), new Vector3(0,0,0), new Vector3(0,0,0))
+    molecules[2] = new Molecule(1, -1, new Vector3(-5, 0, 0), new Vector3(0,0,0), new Vector3(0,0,0))
+    molecules[3] = new Molecule(1, -1, new Vector3(5, 0, 0), new Vector3(0,0,0), new Vector3(0,0,0))
+    setInterval(() => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        fundermentalDrawing(canvas)
+        refreshMolecules(molecules, canvas) 
+    }, 10)
 });
   
