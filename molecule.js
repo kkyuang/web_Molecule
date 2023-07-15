@@ -15,7 +15,7 @@ class Molecule {
         this.acceleration = acceleration;
     }
 
-    static coulombC = 400
+    static coulombC = 1000
     static dt = 0.01
 
     //전기력 계산

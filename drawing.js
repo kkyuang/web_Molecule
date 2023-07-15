@@ -62,17 +62,24 @@ function fundermentalDrawing(cvs){
     ctx.stroke()
 }
 
+function atan3(x){
+   return  x * (1.1164565493- x * (0.4377777778 + x * -0.0924888788))
+}
+
 function dpMolecule(mc, cvs){
     var ctx = cvs.getContext("2d");
     position = cvtctVector3(mc.position)
     var centerX = position.x
     var centerY = position.y
-    var radius = 1* (mc.position.z + xmax);
+    var rad = 8
 
-    
+
+    var radius = 2 * rad * atan3(rad / (7 - mc.position.z));
+
+    //위치에 선 긋기
     ctx.beginPath()
     ctx.moveTo(cvtct(0, 0, 0).x, cvtct(0, 0, 0).y)
-    ctx.lineTo(cvtctVector3(mc.acceleration.scalarmul(0.5)).x, cvtctVector3(mc.acceleration.scalarmul(0.5)).y)
+    ctx.lineTo(cvtctVector3(mc.position.scalarmul(1)).x, cvtctVector3(mc.position.scalarmul(1)).y)
     ctx.stroke()
 
     ctx.beginPath();
