@@ -89,3 +89,8 @@ class Molecule {
         this.position = this.position.add(this.velocity.scalarmul(Molecule.dt)) // dx=v*dt
     }*/
 }
+
+//이온 클래스 선언
+class Ion{
+
+}
