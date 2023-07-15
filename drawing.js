@@ -72,7 +72,7 @@ function dpMolecule(mc, cvs){
     
     ctx.beginPath()
     ctx.moveTo(cvtct(0, 0, 0).x, cvtct(0, 0, 0).y)
-    ctx.lineTo(cvtctVector3(mc.acceleration.scalarmul(10)).x, cvtctVector3(mc.acceleration.scalarmul(10)).y)
+    ctx.lineTo(cvtctVector3(mc.acceleration.scalarmul(0.5)).x, cvtctVector3(mc.acceleration.scalarmul(0.5)).y)
     ctx.stroke()
 
     ctx.beginPath();

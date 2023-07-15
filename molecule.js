@@ -15,7 +15,7 @@ class Molecule {
         this.acceleration = acceleration;
     }
 
-    static coulombC = 40
+    static coulombC = 400
     static dt = 0.01
 
     //전기력 계산
@@ -43,12 +43,23 @@ class Molecule {
         this.velocity = this.velocity.add(this.acceleration.scalarmul(Molecule.dt)) // dv=a*dt
         this.position = this.position.add(this.velocity.scalarmul(Molecule.dt)) // dx=v*dt
     }
-    //위치 새로고침
+    //위치 새로고침(구면상에서)
     refreshPositionInSphere(radius){
         this.velocity = this.velocity.add(this.acceleration.scalarmul(Molecule.dt)) // dv=a*dt
         //this.velocity = this.velocity.sub(this.velocity.scalarmul(Molecule.dt)) //감쇠
         this.position = this.position.add(this.velocity.scalarmul(Molecule.dt)) // dx=v*dt
         this.position = Vector3.unitvector(this.position).scalarmul(radius)
+    }
+
+    //결합각
+    bondangle(a){
+        var angle = Math.acos(Vector3.dotproduct(a.position, this.position)/(a.position.norm()*this.position.norm()))*180/Math.PI
+        return angle
+    }
+
+    static bondangle(a, b){
+        var angle = Math.acos(Vector3.dotproduct(a.position, b.position)/(a.position.norm()*b.position.norm()))*180/Math.PI
+        return angle
     }
     /*
     //구면 상에서 위치 새로고침
