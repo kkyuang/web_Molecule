@@ -35,8 +35,8 @@ class Vector3 {
         return a.x*this.x + a.y*this.y + a.z*this.z
     }
     //동치
-    isEqual(a, b){
-        if(a.x == b.x && a.y == b.y && a.z == b.z){
+    isEqual(a){
+        if(a.x == this.x && a.y == this.y && a.z == this.z){
             return true
         }
         else{
@@ -88,6 +88,10 @@ class Vector3 {
         else{
             return false
         }
+    }
+    //절댓값
+    static norm(a){
+        return Vector3.distance(Vector3.zeroVector, a)
     }
 }
 

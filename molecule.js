@@ -92,5 +92,5 @@ class Molecule {
 
 //이온 클래스 선언
 class Ion{
-
+    
 }

@@ -72,9 +72,10 @@ function dpMolecule(mc, cvs){
     var centerX = position.x
     var centerY = position.y
     var rad = 8
+    var camz = 7
 
 
-    var radius = 2 * rad * atan3(rad / (7 - mc.position.z));
+    var radius = 2 * rad * atan3(rad / (camz - mc.position.z));
 
     //위치에 선 긋기
     ctx.beginPath()

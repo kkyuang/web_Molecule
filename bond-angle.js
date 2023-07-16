@@ -38,12 +38,12 @@ function start_simul(){
     for(var i = 1; i < SN+1; i++){
         molecules[i] = new Molecule(1, -1, new Vector3(Math.random(), Math.random(), Math.random()), new Vector3(0,0,0), new Vector3(0,0,0))
     }
-    
+
     Animeinterval = setInterval(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         fundermentalDrawing(canvas)
         refreshMolecules(molecules, canvas) 
-    }, 10)
+    }, 1/Molecule.dt)
 }
 function stop_simul(){
     clearInterval(Animeinterval)
