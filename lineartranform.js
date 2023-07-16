@@ -1,3 +1,7 @@
+axisWidth = 3
+unitVectorWidth = 4
+normalWidth = 1
+
 //좌표축 그리기
 function drawAxis(){
     
@@ -5,7 +9,7 @@ function drawAxis(){
     var ctx = cvs.getContext("2d");
     ctx.strokeStyle = 'black';
 
-    ctx.lineWidth = 2;
+    ctx.lineWidth = axisWidth;
     //x축 그리기
     ctx.beginPath()
     ctx.moveTo(cvtct(xmax, 0, 0).x, cvtct(xmax, 0, 0).y)
@@ -24,7 +28,7 @@ function drawGrid(){
     
     var cvs = $("#myCanvas")[0];
     var ctx = cvs.getContext("2d");
-    ctx.lineWidth = 1;
+    ctx.lineWidth = normalWidth;
     ctx.strokeStyle = 'black';
 
     for(var i = ymin; i <= ymax; i++){
@@ -59,15 +63,15 @@ function drawGridTransformed(a11, a12, a21, a22){
     
     var cvs = $("#myCanvas")[0];
     var ctx = cvs.getContext("2d");
-    ctx.lineWidth = 1;
+    ctx.lineWidth = normalWidth;
     ctx.strokeStyle = 'red';
 
     for(var i = ymin; i <= ymax; i++){
         if(i==0){
-            ctx.lineWidth = 2;
+            ctx.lineWidth = axisWidth;
         }
         else{
-            ctx.lineWidth = 1;
+            ctx.lineWidth = normalWidth;
         }
 
         ltf = linearTf(xmax, i, a11, a12, a21, a22)
@@ -88,10 +92,10 @@ function drawGridTransformed(a11, a12, a21, a22){
 
     for(var i = xmin; i <= xmax; i++){
         if(i==0){
-            ctx.lineWidth = 2;
+            ctx.lineWidth = axisWidth;
         }
         else{
-            ctx.lineWidth = 1;
+            ctx.lineWidth = normalWidth;
         }
         //y축 그리기
         ltf = linearTf(i, ymax, a11, a12, a21, a22)
@@ -114,7 +118,7 @@ function drawGridTransformed(a11, a12, a21, a22){
 function drawTransformedUnitvector(a11, a12, a21, a22){
     var cvs = $("#myCanvas")[0];
     var ctx = cvs.getContext("2d");
-    ctx.lineWidth = 3;
+    ctx.lineWidth = unitVectorWidth;
     ctx.strokeStyle = 'blue';
 
     tfed = new Vector3(0, 0, 0)
@@ -140,6 +144,12 @@ function view(){
     var cvs = $("#myCanvas")[0];
     var ctx = cvs.getContext("2d");
     ctx.clearRect(0, 0, cvs.width, cvs.height);
+
+    xmax=($("#xmax")[0].value) * 1
+    xmin=($("#xmin")[0].value) * 1
+    ymax=($("#ymax")[0].value) * 1
+    ymin=($("#ymin")[0].value) * 1
+
     drawAxis()
     drawGrid()
     drawGridTransformed(($("#a11")[0].value) * 1, ($("#a12")[0].value) * 1, ($("#a21")[0].value) * 1, ($("#a22")[0].value) * 1)
@@ -149,6 +159,11 @@ function view(){
 
 
 $(document).ready(function () {
+
+    xmax=($("#xmax")[0].value) * 1
+    xmin=($("#xmin")[0].value) * 1
+    ymax=($("#ymax")[0].value) * 1
+    ymin=($("#ymin")[0].value) * 1
     drawAxis()
     drawGrid()
 })
